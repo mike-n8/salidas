@@ -65,7 +65,7 @@ input::-moz-focus-inner {
 	padding: 0;
 }
 
-input, select, textarea {
+select, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	-ms-appearance: none;
@@ -182,6 +182,59 @@ input, select, textarea {
 		font-style: italic;
 		padding: 1em 0 1em 2em;
 	}
+
+	/* *************************************       CSS PARA LA TABLA DE LA SALIDA DE PREDICACION ***********************************          */
+
+	#tabla-salida table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	#tabla-salida th, #tabla-salida td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: center;
+	}
+	#tabla-salida th {
+		background-color: #f2f2f2;
+		cursor: pointer;
+	}
+
+	#tabla-salida h2 {
+		text-align: center;
+	}
+
+	.input-terri, .lugares {
+		text-align: center;
+	}
+	
+	.lugares, .conductores, .territorio, .grupos, input {
+		cursor: pointer;
+	}
+
+	/* *************************************       CSS PARA LA TABLA DE LOS REGISTROS DE CONDUCTORES ***********************************          */
+
+	#tabla-registro table {
+		width: 30%;
+		border-collapse: collapse;
+		margin-top: 30px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	#tabla-registro th, #tabla-registro tr, #tabla-registro td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: center;
+	}
+	#tabla-registro th {
+		background-color: #f2f2f2;
+		cursor: pointer;
+	}
+
 
 /* Container */
 

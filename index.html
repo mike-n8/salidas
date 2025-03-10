@@ -43,7 +43,7 @@
 										<li><a href="#">Veroeros feugiat</a></li>
 									</ul>
 								</li>
-								<li><a href="left-sidebar.html">Left Sidebar</a></li>
+								<li><a href="left-sidebar.html">Registrese</a></li>
 								<li><a href="right-sidebar.html">Right Sidebar</a></li>
 								<li><a href="two-sidebar.html">Two Sidebar</a></li>
 								<li><a href="no-sidebar.html">No Sidebar</a></li>
@@ -63,28 +63,230 @@
 			<!-- Highlights -->
 				<section class="wrapper style1">
 					<div class="container">
-						<div class="row gtr-200">
-							<section class="col-4 col-12-narrower">
-								<div class="box highlight">
-									<i class="icon solid major fa-paper-plane"></i>
-									<h3>This Is Important</h3>
-									<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-								</div>
-							</section>
-							<section class="col-4 col-12-narrower">
-								<div class="box highlight">
-									<i class="icon solid major fa-pencil-alt"></i>
-									<h3>Also Important</h3>
-									<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-								</div>
-							</section>
-							<section class="col-4 col-12-narrower">
-								<div class="box highlight">
-									<i class="icon solid major fa-wrench"></i>
-									<h3>Probably Important</h3>
-									<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-								</div>
-							</section>
+						<div id="tabla-salida">
+							<h2>Tabla con Fecha Automática</h2>
+
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Lugar</th>
+                    <th>Conductores</th>
+                    <th>Territorios</th>
+                    <th>Grupos</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="0">
+                    <td class="dia" data-day="1">Lunes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <div id="suggestions" class="autocomplete-suggestions"></div>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td class="grupos"> </td>
+                </tr>
+                <tr id="1">
+                    <td class="dia" data-day="1">Lunes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="2">
+                    <td class="dia" data-day="2">Martes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="3">
+                    <td class="dia" data-day="2">Martes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="4">
+                    <td class="dia" data-day="2">Martes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="5">
+                    <td class="dia" data-day="3">Miercoles</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="6">
+                    <td class="dia" data-day="4">Jueves</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="7">
+                    <td class="dia" data-day="4">Jueves</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="8">
+                    <td class="dia" data-day="4">Jueves</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="9">
+                    <td class="dia" data-day="4">Jueves</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="10">
+                    <td class="dia" data-day="5">Viernes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="11">
+                    <td class="dia" data-day="5">Viernes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="12">
+                    <td class="dia" data-day="5">Viernes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="13">
+                    <td class="dia" data-day="5">Viernes</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td> </td>
+                </tr>
+                <tr id="14">
+                    <td class="dia" data-day="6">Sabado</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td>1-6</td>
+                </tr>
+                <tr id="15">
+                    <td class="dia" data-day="6">Sabado</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td>2-3</td>
+                </tr>
+                <tr id="16">
+                    <td class="dia" data-day="6">Sabado</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td>4-5</td>
+                </tr>
+                <tr>
+                    <td colspan="7">Administrador de Zoom Leo Olivera</td>
+                </tr>
+                <tr id="17">
+                    <td class="dia" data-day="6">Sabado</td>
+                    <td><input type="date" class="date-input"></td>
+                    <td class="hora" onclick="guardarHora(this)">
+                        <input type="time">
+                    </td>
+                    <td class="lugares" onclick="guardarLugar(this)"> </td>
+                    <td onclick="abrirPopup(this)" class="conductores"> </td>
+                    <td class="territorio" onclick="guardarTerritorio(this)"><input type="text" class="input-terri"></td>
+                    <td>Todos</td>
+                </tr>
+                <tr>
+                    <td colspan="7">Administrador de Zoom Leo Barrios</td>
+                </tr>
+            </tbody>
+        </table>
 						</div>
 					</div>
 				</section>
@@ -234,6 +436,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/login.js"></script>
 
 	</body>
 </html>
