@@ -98,7 +98,6 @@ select, textarea {
 		}
 
 	body, input, select, textarea {
-		color: #474747;
 		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 16pt;
 		font-weight: 300;
@@ -181,6 +180,10 @@ select, textarea {
 		border-left: solid 0.5em #e0e0e0;
 		font-style: italic;
 		padding: 1em 0 1em 2em;
+	}
+
+	#botonCerrarSesion {
+		background-color: red;
 	}
 
 	/* *************************************       CSS PARA LA TABLA DE LA SALIDA DE PREDICACION ***********************************          */
@@ -2065,14 +2068,18 @@ select, textarea {
 		-ms-transition: border-color 0.2s ease-in-out;
 		transition: border-color 0.2s ease-in-out;
 		background: #fff;
-		border: solid 1px #e0e0e0;
+		border: solid 1px;
 		border-radius: 5px;
-		color: inherit;
 		display: block;
 		outline: 0;
 		padding: 0.75em;
 		text-decoration: none;
-		width: 100%;
+		width: 80%;
+    	margin: 0 auto; /* Centra los elementos horizontalmente */
+	}
+
+	.input-terri {
+		border: solid 1px #00000000 !important;
 	}
 
 		input[type="text"]:focus,
@@ -2727,10 +2734,10 @@ select, textarea {
 /* Banner */
 
 	#banner {
-		background-image: url("../../images/banner.jpg");
+		background: linear-gradient(to bottom, #7dccd8, #00f7ff);
 		background-position: center center;
 		background-size: cover;
-		height: 28em;
+		height: 100em;
 		text-align: center;
 		position: relative;
 	}
@@ -2874,13 +2881,6 @@ select, textarea {
 				font-size: 14pt;
 				line-height: 1.5em;
 			}
-
-		/* Banner */
-
-			#banner {
-				height: 24em;
-			}
-
 	}
 
 /* Normal */
@@ -2919,12 +2919,6 @@ select, textarea {
 				#header h1 {
 					padding: 0 0 1.75em 0;
 				}
-
-		/* Banner */
-
-			#banner {
-				height: 20em;
-			}
 
 		/* Wrapper */
 
@@ -3323,12 +3317,6 @@ select, textarea {
 				margin: 0;
 				display: block;
 				line-height: 2em;
-			}
-
-		/* Banner */
-
-			#banner {
-				height: 18em;
 			}
 
 		/* Wrapper */
