@@ -2739,7 +2739,6 @@ select, textarea {
 		background-size: cover;
 		height: 100em;
 		text-align: center;
-		position: relative;
 	}
 
 		#banner header {

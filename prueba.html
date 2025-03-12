@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descargar Tabla en Excel</title>
+  <!-- Cargar la librería SheetJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <table id="miTabla" border="1">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Juan</td>
+        <td>30</td>
+        <td>Madrid</td>
+      </tr>
+      <tr>
+        <td>Ana</td>
+        <td>25</td>
+        <td>Barcelona</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button id="descargarExcel">Descargar como Excel</button>
+
+  <script>
+    document.getElementById('descargarExcel').addEventListener('click', function() {
+      // Seleccionar la tabla por su id
+      var tabla = document.getElementById('miTabla');
+      
+      // Crear un libro de trabajo a partir de la tabla HTML
+      var wb = XLSX.utils.table_to_book(tabla, { sheet: "Hoja 1" });
+      
+      // Crear un enlace para descargar el archivo Excel
+      XLSX.writeFile(wb, "tabla.xlsx");
+    });
+  </script>
+
+</body>
+</html>

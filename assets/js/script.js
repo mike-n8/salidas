@@ -151,8 +151,6 @@ document.querySelectorAll(".grupos, .lugares").forEach(cell => {
     this.appendChild(input);
     input.focus();
 
-    let suggestionsContainer = null;
-
     // Mostrar sugerencias si la celda es de tipo "lugares"
     if (this.classList.contains("lugares")) {
       suggestionsContainer = document.getElementById("suggestions");
@@ -222,6 +220,7 @@ document.querySelectorAll(".grupos, .lugares").forEach(cell => {
   });
 });
 
+
 //INPUT modificar el territorio!
 let inputTerriInput = document.querySelectorAll('.input-terri');
 
@@ -275,19 +274,35 @@ function volverAlTd(info) {
 // -----------------------------  IMPRIMIR TABLA -----------------------------------
 
 function imprimirSoloTabla() {
-  // Guardar el contenido original
-  let contenidoOriginal = document.body.innerHTML;
+    // Capturar la tabla y sus estilos
+    let tabla = document.getElementById('dataTable').outerHTML;
+    let estilos = document.head.innerHTML;
 
-  // Obtener solo la tabla
-  let contenidoTabla = document.getElementById('dataTable').outerHTML;
-
-  // Reemplazar el contenido de la página con solo la tabla
-  document.body.innerHTML = contenidoTabla;
-
-  // Imprimir
-  window.print();
-
-  // Restaurar el contenido original
-  document.body.innerHTML = contenidoOriginal;
+    // Crear una nueva ventana con la tabla y los estilos
+    let ventana = window.open('', '', 'height=500, width=800');
+    ventana.document.write('<html><head>' + estilos + '</head><body>');
+    ventana.document.write('<h2>Tabla</h2>'); // Opcional
+    ventana.document.write(tabla);
+    ventana.document.write('</body></html>');
+    ventana.document.close();
+    ventana.print();
 }
+
+document.getElementById('descargar').addEventListener('click', function() {
+  var tabla = document.getElementById('dataTable');
+  
+  // Usamos html2canvas para capturar la tabla
+  html2canvas(tabla).then(function(canvas) {
+    // Convertimos el canvas a imagen
+    var imagen = canvas.toDataURL('image/png');
+
+    // Creamos un enlace de descarga
+    var enlace = document.createElement('a');
+    enlace.href = imagen;
+    enlace.download = 'tabla.png';
+    
+    // Simulamos el clic en el enlace para descargar la imagen
+    enlace.click();
+  });
+});
 
