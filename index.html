@@ -7,6 +7,8 @@
 <html>
 	<head>
 		<title>Salidas Predicar</title>
+        <!-- Cargar la librería SheetJS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -69,6 +71,7 @@
 
         <table id="dataTable">
             <thead>
+                <tr><th colspan="7">SALIDAS A PREDICAR PRESENCIAL Y POR ZOOM</th></tr>
                 <tr>
                     <th>Dia</th>
                     <th>Fecha</th>
@@ -288,7 +291,7 @@
                 </tr>
             </tbody>
         </table>
-        <button id="descargar">Imprimir Tabla</button>
+        <button id="descargarExcel">Descargar Tabla</button>
 						</div>
 					</div>
 				</section>

@@ -36,10 +36,10 @@
   <script>
     document.getElementById('descargarExcel').addEventListener('click', function() {
       // Seleccionar la tabla por su id
-      var tabla = document.getElementById('miTabla');
+      let tabla = document.getElementById('miTabla');
       
       // Crear un libro de trabajo a partir de la tabla HTML
-      var wb = XLSX.utils.table_to_book(tabla, { sheet: "Hoja 1" });
+      let wb = XLSX.utils.table_to_book(tabla, { sheet: "Hoja 1" });
       
       // Crear un enlace para descargar el archivo Excel
       XLSX.writeFile(wb, "tabla.xlsx");

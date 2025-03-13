@@ -274,35 +274,74 @@ function volverAlTd(info) {
 // -----------------------------  IMPRIMIR TABLA -----------------------------------
 
 function imprimirSoloTabla() {
-    // Capturar la tabla y sus estilos
-    let tabla = document.getElementById('dataTable').outerHTML;
-    let estilos = document.head.innerHTML;
+  // Capturar la tabla original
+  let tablaOriginal = document.getElementById('dataTable');
+  let estilos = document.head.innerHTML;
 
-    // Crear una nueva ventana con la tabla y los estilos
-    let ventana = window.open('', '', 'height=500, width=800');
-    ventana.document.write('<html><head>' + estilos + '</head><body>');
-    ventana.document.write('<h2>Tabla</h2>'); // Opcional
-    ventana.document.write(tabla);
-    ventana.document.write('</body></html>');
-    ventana.document.close();
-    ventana.print();
+  // Crear una copia de la tabla
+  let tablaCopia = tablaOriginal.cloneNode(true);
+
+  // Aplicar estilos en línea a cada elemento de la tabla copiada
+  function copiarEstilos(elementoOriginal, elementoCopia) {
+      let estilosComputados = window.getComputedStyle(elementoOriginal);
+      for (let propiedad of estilosComputados) {
+          elementoCopia.style[propiedad] = estilosComputados.getPropertyValue(propiedad);
+      }
+  }
+
+  // Recorrer los nodos de la tabla original y la copia
+  function recorrerYAplicarEstilos(nodoOriginal, nodoCopia) {
+      copiarEstilos(nodoOriginal, nodoCopia);
+      let hijosOriginales = nodoOriginal.children;
+      let hijosCopia = nodoCopia.children;
+
+      for (let i = 0; i < hijosOriginales.length; i++) {
+          recorrerYAplicarEstilos(hijosOriginales[i], hijosCopia[i]);
+      }
+  }
+
+  recorrerYAplicarEstilos(tablaOriginal, tablaCopia);
+
+  // Copiar valores de los inputs
+  let inputsOriginales = tablaOriginal.querySelectorAll('input');
+  let inputsCopia = tablaCopia.querySelectorAll('input');
+
+  inputsOriginales.forEach((inputOriginal, index) => {
+      if (inputsCopia[index]) {
+          inputsCopia[index].setAttribute('value', inputOriginal.value);
+      }
+  });
+
+  // Crear una nueva ventana con la tabla y los estilos
+  // Determinar el tamaño completo de la pantalla
+  let anchoPantalla = screen.width;
+  let altoPantalla = screen.height;
+
+  // Abrir una nueva ventana con tamaño completo
+  let ventana = window.open(
+      '', 
+      '', 
+      `width=${anchoPantalla}, height=${altoPantalla}, top=0, left=0`
+  );
+  ventana.document.write('<html><head>' + estilos + '</head><body style="background: linear-gradient(to bottom, #7dccd8, #00f7ff); padding: 20px;">');
+  ventana.document.write(tablaCopia.outerHTML);
+  ventana.document.write('</body></html>');
+  ventana.document.close();
+
+  // Imprimir la nueva ventana
+  ventana.print();
 }
 
-document.getElementById('descargar').addEventListener('click', function() {
-  var tabla = document.getElementById('dataTable');
-  
-  // Usamos html2canvas para capturar la tabla
-  html2canvas(tabla).then(function(canvas) {
-    // Convertimos el canvas a imagen
-    var imagen = canvas.toDataURL('image/png');
 
-    // Creamos un enlace de descarga
-    var enlace = document.createElement('a');
-    enlace.href = imagen;
-    enlace.download = 'tabla.png';
-    
-    // Simulamos el clic en el enlace para descargar la imagen
-    enlace.click();
-  });
+
+document.getElementById('descargarExcel').addEventListener('click', function() {
+  // Seleccionar la tabla por su id
+  let tabla = document.getElementById('dataTable');
+  
+  // Crear un libro de trabajo a partir de la tabla HTML
+  let wb = XLSX.utils.table_to_book(tabla, { sheet: "Hoja 1" });
+  
+  // Crear un enlace para descargar el archivo Excel
+  XLSX.writeFile(wb, "tabla.xlsx");
 });
 
