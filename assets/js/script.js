@@ -1,3 +1,24 @@
+// ///////////////// GUARDAR LOS LUGARES DE SALIDA EN LA LISTA "DIRECCION" ///////////////////////////
+let listaLugar = JSON.parse(localStorage.getItem("direccion")) || [];
+let objetoLugar = {};
+
+function guardarSalida(event) {
+    event.preventDefault();
+    // Obtener el valor del input
+    const lugarDireccion = document.getElementById('lugar').value;
+
+    objetoLugar= lugarDireccion;
+
+        // Guardar el número en el arreglo
+        listaLugar.push(objetoLugar);
+        console.log(listaLugar);
+        localStorage.setItem("direccion", JSON.stringify(listaLugar));
+        window.location.href = "index.html";
+
+}
+
+// //////////////// / --------->>> LISTA PROGRAMA
+
 let listaPrograma = JSON.parse(localStorage.getItem("programa")) || [];
 if(listaPrograma.length === 0){
   for (let i = 0; i < 18; i++) { //Cuando no hay ninguna salida te crea 18 filas vacias.
@@ -28,8 +49,8 @@ if(listaPrograma.length === 0){
     let tdConductor = tr.querySelector('.conductores');
     tdConductor.textContent = listaPrograma[i].conductor;
     //TERRITORIOS
-    let inputTerritorio = tr.querySelector('.territorio').querySelector('.input-terri');
-    inputTerritorio.value = listaPrograma[i].territorio;
+    let tdTerritorio = tr.querySelector('.territorio')
+    tdTerritorio.textContent = listaPrograma[i].territorio;
   }
 }
 
@@ -45,9 +66,45 @@ function guardarTerritorio(td) {
   window.tdSeleccionadoTerritorio = td;
 }
 
-// Seleccionamos todos los inputs de tipo time y number
+
+/////////////////  COLUMNA "FECHA" ///////////////////
+const rows = document.querySelectorAll("tbody tr");
+const today = new Date();
+const todayDay = today.getDay(); // Día de la semana actual (0 = Domingo, 1 = Lunes, ...)
+
+// Determinar si estamos en la semana actual o la siguiente
+let referenceDate = new Date(today);
+if (todayDay !== 1) { // Si hoy NO es lunes
+    referenceDate.setDate(today.getDate() + (8 - todayDay)); // Ir al próximo lunes
+  } else {
+    referenceDate.setDate(today.getDate()); // Usar este lunes como referencia
+  }
+
+  rows.forEach(row => {
+  const dayCell = row.querySelector("td[data-day]");
+  
+  if (!dayCell) {
+    return; // Saltar filas sin el atributo data-day
+  }
+  
+  const dayNumber = parseInt(row.querySelector("td[data-day]").dataset.day);
+  const dateInput = row.querySelector(".date-input");
+  
+  // Calcular la fecha correcta basada en el lunes de referencia
+  let selectedDate = new Date(referenceDate);
+  selectedDate.setDate(referenceDate.getDate() + (dayNumber - 1)); // Ajustar días
+
+    // Si es domingo, ajustar la fecha según la condición dada
+    if (dayNumber === 0) {
+        selectedDate.setDate(selectedDate.getDate() + (todayDay === 1 ? 14 : 7));
+      }
+
+    // Establecer la fecha en formato ISO (YYYY-MM-DD)
+    dateInput.value = selectedDate.toISOString().split("T")[0];
+});
+
+// //////////////// GUARDAR LA HORA!! ///////////////////////////
 const inputsHora = document.querySelectorAll(".hora");
-const inputTerri = document.querySelectorAll(".territorio");
 
 // Agregamos un evento 'change' a cada input de hora
 inputsHora.forEach(input => {
@@ -62,80 +119,9 @@ inputsHora.forEach(input => {
   });
 });
 
-// Agregamos un evento 'change' a cada input de territorio
-inputTerri.forEach(input => {
-  input.addEventListener("change", (event) => {
-    let territorioSeleccionado = event.target.value;
-    let idTrSeleccionado = tdSeleccionadoTerritorio.closest('tr').id;
 
-    const programa = JSON.parse(localStorage.getItem("programa"));
-    let index = programa.findIndex(prog => prog.id === Number(idTrSeleccionado));
-    if (index !== -1) {
-      programa[index].territorio = territorioSeleccionado;
-      localStorage.setItem("programa", JSON.stringify(programa));
-    }
-  });
-});
-
-// ///////////////// GUARDAR LOS LUGARES DE SALIDA ///////////////////////////
-let listaLugar = JSON.parse(localStorage.getItem("direccion")) || [];
-let objetoLugar = {};
-
-function guardarSalida(event) {
-    event.preventDefault();
-    // Obtener el valor del input
-    const lugarDireccion = document.getElementById('lugar').value;
-
-    objetoLugar= lugarDireccion;
-
-        // Guardar el número en el arreglo
-        listaLugar.push(objetoLugar);
-        console.log(listaLugar);
-        localStorage.setItem("direccion", JSON.stringify(listaLugar));
-        window.location.href = "index.html";
-
-}
-
-
-//Fecha de la columna "Fecha"
-  const rows = document.querySelectorAll("tbody tr");
-  const today = new Date();
-  const todayDay = today.getDay(); // Día de la semana actual (0 = Domingo, 1 = Lunes, ...)
-
-  // Determinar si estamos en la semana actual o la siguiente
-  let referenceDate = new Date(today);
-  if (todayDay !== 1) { // Si hoy NO es lunes
-      referenceDate.setDate(today.getDate() + (8 - todayDay)); // Ir al próximo lunes
-  } else {
-      referenceDate.setDate(today.getDate()); // Usar este lunes como referencia
-  }
-
-  rows.forEach(row => {
-    const dayCell = row.querySelector("td[data-day]");
-
-    if (!dayCell) {
-        return; // Saltar filas sin el atributo data-day
-    }
-
-      const dayNumber = parseInt(row.querySelector("td[data-day]").dataset.day);
-      const dateInput = row.querySelector(".date-input");
-
-      // Calcular la fecha correcta basada en el lunes de referencia
-      let selectedDate = new Date(referenceDate);
-      selectedDate.setDate(referenceDate.getDate() + (dayNumber - 1)); // Ajustar días
-
-      // Si es domingo, ajustar la fecha según la condición dada
-      if (dayNumber === 0) {
-          selectedDate.setDate(selectedDate.getDate() + (todayDay === 1 ? 14 : 7));
-      }
-
-      // Establecer la fecha en formato ISO (YYYY-MM-DD)
-      dateInput.value = selectedDate.toISOString().split("T")[0];
-  });
-
-
-// Función para manejar la edición de celdas
-document.querySelectorAll(".grupos, .lugares").forEach(cell => {
+// //////////////////////////////////// COLUMNA: LUGARES Y TERRITORIOS ////////////////////////////
+document.querySelectorAll(".grupos, .lugares, .territorio").forEach(cell => {
   cell.addEventListener('click', function () {
     let currentText = this.innerText;
     let input = document.createElement('input');
@@ -144,6 +130,8 @@ document.querySelectorAll(".grupos, .lugares").forEach(cell => {
     // Si la celda es de tipo "lugares", agregamos la clase
     if (this.classList.contains("lugares")) {
       input.classList.add("input-lugar");
+    } else if (this.classList.contains("territorio")) {
+      input.classList.add("input-terri");
     }
 
     // Reemplazar la celda por el input
@@ -151,8 +139,34 @@ document.querySelectorAll(".grupos, .lugares").forEach(cell => {
     this.appendChild(input);
     input.focus();
 
+
+    //INPUT modificar el territorio!
+    if (this.classList.contains("territorio")) {
+        let inputTerriInput = document.querySelectorAll('.input-terri');
+
+        const allowedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', 'ArrowLeft', 'ArrowRight']; // Teclas permitidas
+
+        // Recorre la NodeList y añade el event listener a cada input
+        inputTerriInput.forEach((input) => {
+          input.addEventListener('keydown', (event) => {
+            // Validar teclas permitidas
+            if (!allowedKeys.includes(event.key) && event.key !== "Backspace" && event.key !== "Tab") {
+              event.preventDefault(); // Evita que teclas no permitidas se escriban
+            }
+
+            // Quitar foco si presionan Enter
+            if (event.key === 'Enter') {
+              input.blur();
+            }
+            input.addEventListener('blur', () => {
+              console.log("La septima!");
+            });
+          });
+        });
+      }
+
     // Mostrar sugerencias si la celda es de tipo "lugares"
-    if (this.classList.contains("lugares")) {
+    else if (this.classList.contains("lugares")) {
       suggestionsContainer = document.getElementById("suggestions");
       suggestionsContainer.innerHTML = "";
       suggestionsContainer.style.display = "none";
@@ -220,26 +234,26 @@ document.querySelectorAll(".grupos, .lugares").forEach(cell => {
   });
 });
 
+// // ///////////////// GUARDAR LOS TERRITORIOS ///////////////////////////
 
-//INPUT modificar el territorio!
-let inputTerriInput = document.querySelectorAll('.input-terri');
+const inputTerri = document.querySelectorAll(".territorio");
 
-const allowedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', 'ArrowLeft', 'ArrowRight']; // Teclas permitidas
-
-// Recorre la NodeList y añade el event listener a cada input
-inputTerriInput.forEach((input) => {
-  input.addEventListener('keydown', (event) => {
-    // Validar teclas permitidas
-    if (!allowedKeys.includes(event.key) && event.key !== "Backspace" && event.key !== "Tab") {
-      event.preventDefault(); // Evita que teclas no permitidas se escriban
-    }
-
-    // Quitar foco si presionan Enter
-    if (event.key === 'Enter') {
-      input.blur();
+inputTerri.forEach(input => {
+  input.addEventListener("change", (event) => {
+    let territorioSeleccionado = event.target.value;
+    let idTrSeleccionado = tdSeleccionadoTerritorio.closest('tr').id;
+    
+    const programa = JSON.parse(localStorage.getItem("programa"));
+    let index = programa.findIndex(prog => prog.id === Number(idTrSeleccionado));
+    if (index !== -1) {
+      programa[index].territorio = territorioSeleccionado;
+      localStorage.setItem("programa", JSON.stringify(programa));
     }
   });
 });
+
+
+
 
 
    function abrirPopup(td) {
@@ -271,7 +285,7 @@ function volverAlTd(info) {
   }
 }
 
-// -----------------------------  IMPRIMIR TABLA -----------------------------------
+// -----------------------------  IMPRIMIR TABLA PDF -----------------------------------
 
 function imprimirSoloTabla() {
   // Capturar la tabla original
@@ -333,15 +347,84 @@ function imprimirSoloTabla() {
 }
 
 
+// -----------------------------  DESCARGAR TABLA EXEL -----------------------------------
 
 document.getElementById('descargarExcel').addEventListener('click', function() {
-  // Seleccionar la tabla por su id
+  // Seleccionar la tabla original
   let tabla = document.getElementById('dataTable');
-  
-  // Crear un libro de trabajo a partir de la tabla HTML
-  let wb = XLSX.utils.table_to_book(tabla, { sheet: "Hoja 1" });
-  
+
+  // Crear una copia de la tabla para actualizar los valores de los inputs
+  let tablaCopia = tabla.cloneNode(true);
+
+  // Sincronizar valores de los inputs con la tabla copiada
+  let filasOriginales = tabla.querySelectorAll('tr');
+  let filasCopia = tablaCopia.querySelectorAll('tr');
+
+  filasOriginales.forEach((filaOriginal, filaIndex) => {
+      let celdasOriginales = filaOriginal.querySelectorAll('td');
+      let celdasCopia = filasCopia[filaIndex].querySelectorAll('td');
+
+      celdasOriginales.forEach((celdaOriginal, celdaIndex) => {
+          let input = celdaOriginal.querySelector('input, select');
+          if (input) {
+              let valor = (input.type === 'checkbox' || input.type === 'radio') 
+                  ? (input.checked ? '✔' : '✘') 
+                  : input.value;
+              celdasCopia[celdaIndex].textContent = valor;
+          }
+      });
+  });
+
+  // Crear un libro de trabajo a partir de la tabla actualizada
+  let wb = XLSX.utils.table_to_book(tablaCopia, { sheet: "Hoja 1" });
+
+  // Obtener la hoja de cálculo
+  let hoja = wb.Sheets["Hoja 1"];
+
+  // Aplicar estilos personalizados a las celdas
+  for (let celda in hoja) {
+      if (hoja.hasOwnProperty(celda) && celda[0] !== '!') {
+          hoja[celda].s = {
+              font: { name: "Arial", sz: 12, color: { rgb: "FF0000" } }, // Fuente roja
+              fill: { fgColor: { rgb: "00f7ff" } }, // Fondo amarillo
+              border: { 
+                  top: { style: "thin", color: { rgb: "000000" } },
+                  left: { style: "thin", color: { rgb: "000000" } },
+                  bottom: { style: "thin", color: { rgb: "000000" } },
+                  right: { style: "thin", color: { rgb: "000000" } }
+              } // Bordes negros finos
+          };
+      }
+  }
+
   // Crear un enlace para descargar el archivo Excel
-  XLSX.writeFile(wb, "tabla.xlsx");
+  XLSX.writeFile(wb, "tabla_estilizada.xlsx");
 });
+
+//  -----------------------------  DESCARGAR IMAGEN DE LA TABLA -----------------------------------
+
+function capturarTablaConFondo() {
+  // Capturar la tabla original
+  let tablaOriginal = document.getElementById('dataTable');
+
+  // Usar html2canvas con la opción de color de fondo
+  html2canvas(tablaOriginal, {
+      backgroundColor: "#7dccd8" // Aquí defines el color de fondo deseado
+  }).then((canvas) => {
+      // Convertir el canvas a una imagen en formato PNG
+      let imagen = canvas.toDataURL("image/png");
+
+      // Crear un enlace para descargar la imagen
+      let enlaceDescarga = document.createElement('a');
+      enlaceDescarga.href = imagen;
+      enlaceDescarga.download = 'salidas-predicacion.png';
+
+      // Simular clic en el enlace para iniciar la descarga
+      enlaceDescarga.click();
+  });
+}
+
+
+
+
 

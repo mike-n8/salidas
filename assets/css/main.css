@@ -205,7 +205,6 @@ select, textarea {
 	#tabla-salida th {
 		background-color: #f2f2f2;
 		font-size: 22px;
-		cursor: pointer;
 	}
 
 	#tabla-salida h2 {
@@ -216,7 +215,7 @@ select, textarea {
 		text-align: center;
 	}
 	
-	.lugares, .conductores, .territorio, .grupos, input {
+	.lugares, .conductores, .territorio, input {
 		cursor: pointer;
 	}
 
