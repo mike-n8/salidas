@@ -186,6 +186,18 @@ select, textarea {
 		background-color: red;
 	}
 
+	#descargarExcel {
+		background-color: darkgreen;
+	}
+
+	#botonPdf {
+		background-color: darkred;
+	}
+
+	#botonImagen {
+		background-color: darkblue;
+	}
+
 	/* *************************************       CSS PARA LA TABLA DE LA SALIDA DE PREDICACION ***********************************          */
 
 	#tabla-salida table {
@@ -2082,8 +2094,22 @@ select, textarea {
 		border: solid 1px #00000000 !important;
 	}
 
-	#lugar {
+	#lugar, #name, #apellido {
 		padding: 0.75em;
+	}
+
+	#registerForm {
+		text-align: center;
+	}
+
+	#registerForm label, #registerForm input {
+		display: inline-block;
+		margin-right: 10px; /* Espacio entre los elementos */
+	  }
+
+	#mananaInp, #tardeInp, #findeInp {
+		width: 60px;
+		height: 60px;
 	}
 
 		input[type="text"]:focus,
@@ -2782,10 +2808,6 @@ select, textarea {
 
 /* Wrapper */
 
-	.wrapper {
-		padding: 5em 0 3em 0;
-	}
-
 		.wrapper.style1 {
 			background: #fff;
 		}
@@ -2837,7 +2859,7 @@ select, textarea {
 /* Footer */
 
 	#footer {
-		padding: 4em 0 8em 0;
+		padding: 4em 0 1em 0;
 	}
 
 		#footer a {
@@ -2923,27 +2945,11 @@ select, textarea {
 					padding: 0 0 1.75em 0;
 				}
 
-		/* Wrapper */
-
-			.wrapper {
-				padding: 3em 0 1em 0;
-			}
-
 		/* CTA */
 
 			#cta {
 				padding: 2em 0;
 			}
-
-		/* Footer */
-
-			#footer {
-				padding: 3em 0 3em 0;
-			}
-
-				#footer .container {
-					margin-bottom: 1em;
-				}
 
 	}
 
@@ -3322,12 +3328,6 @@ select, textarea {
 				line-height: 2em;
 			}
 
-		/* Wrapper */
-
-			.wrapper {
-				padding: 2em 0 1px 0;
-			}
-
 	}
 
 /* Mobile (Portrait) */
@@ -3381,12 +3381,6 @@ select, textarea {
 				#banner header {
 					padding: 20px;
 				}
-
-		/* Wrapper */
-
-			.wrapper {
-				padding: 2em 20px 1px 20px;
-			}
 
 		/* CTA */
 

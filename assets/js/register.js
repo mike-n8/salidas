@@ -23,7 +23,7 @@ function guardarDato(event) {
         listaPersonas.push(objetoPersona);
         console.log(listaPersonas);
         localStorage.setItem("personas", JSON.stringify(listaPersonas));
-        window.location.href = "left-sidebar.html";
+        window.location.href = "register.html";
 
 }
 
