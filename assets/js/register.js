@@ -100,3 +100,21 @@ InputChecFinde.addEventListener('click', ()=>{
 function volver(){
     window.location.href = "index.html";
 }
+
+// ---------------------------------- IMAGENES EN MOVIMIENTO FACHERITAS ----------------------------------------------------
+
+function registerMovimientoDeImagenes() {
+    const registerContainer = document.getElementById("registerImagenMovidas");
+    
+    // Recuperar imágenes del localStorage
+    const registerStoredImages = JSON.parse(localStorage.getItem("personas")) || [];
+  
+    registerStoredImages.forEach((src, index) => {
+        let img = document.createElement("img");
+        img.src = src.codigophoto;
+        img.classList.add("registerImage");
+        img.style.animationDelay = `${index * 0.1}s`; // Para que no salgan todas juntas
+        registerContainer.appendChild(img);
+    });
+  };
+  registerMovimientoDeImagenes();

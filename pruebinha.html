@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotaza</title>
+    <style>
+    #image-container {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.image {
+    width: 100px; /* Ajusta el tamaño según necesites */
+    height: auto;
+    display: inline-block;
+    position: absolute;
+    animation: moveLeft 5s linear infinite;
+}
+
+@keyframes moveLeft {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div id="imagenMovidas">
+    </div>
+    
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("imagenMovidas");
+    
+    // Recuperar imágenes del localStorage
+    const storedImages = JSON.parse(localStorage.getItem("personas")) || [];
+
+    storedImages.forEach((src, index) => {
+        let img = document.createElement("img");
+        img.src = src.codigophoto;
+        img.classList.add("image");
+        img.style.animationDelay = `${index * 1}s`; // Para que no salgan todas juntas
+        container.appendChild(img);
+    });
+});
+
+</script>
+
+</html>

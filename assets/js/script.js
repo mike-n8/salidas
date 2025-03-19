@@ -425,6 +425,25 @@ function capturarTablaConFondo() {
 }
 
 
+// ---------------------------------- IMAGENES EN MOVIMIENTO FACHERITAS ----------------------------------------------------
+
+function movimientoDeImagenes() {
+  const container = document.getElementById("imagenMovidas");
+  
+  // Recuperar imágenes del localStorage
+  const storedImages = JSON.parse(localStorage.getItem("personas")) || [];
+
+  storedImages.forEach((src, index) => {
+      let img = document.createElement("img");
+      img.src = src.codigophoto;
+      img.classList.add("image");
+      img.style.animationDelay = `${index * 0.1}s`; // Para que no salgan todas juntas
+      container.appendChild(img);
+  });
+};
+movimientoDeImagenes();
+
+
 
 
 
